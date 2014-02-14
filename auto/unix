@@ -682,7 +682,10 @@ ngx_feature_test="sem_t  sem;
 . auto/feature
 
 
-CORE_LIBS="$CORE_LIBS -L ../libsep -lsep"
+if [ $NGX_NO_SANDBOX = no ]; then
+    CORE_LIBS="$CORE_LIBS -L ../libsep -lsep"
+fi
+
 if [ $ngx_found = no ]; then
 
     # Linux has POSIX semaphores in libpthread
