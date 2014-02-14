@@ -681,8 +681,7 @@ ngx_feature_test="sem_t  sem;
                   sem_destroy(&sem);"
 . auto/feature
 
-
-if [ $NGX_NO_SANDBOX = no ]; then
+if [ "$NGX_NO_SANDBOX" = "NO" ]; then
     CORE_LIBS="$CORE_LIBS -L ../libsep -lsep"
 fi
 
