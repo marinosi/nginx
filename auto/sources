@@ -281,7 +281,7 @@ HTTP_NOT_MODIFIED_FILTER_MODULE=ngx_http_not_modified_filter_module
 HTTP_STATIC_MODULE=ngx_http_static_module
 HTTP_INDEX_MODULE=ngx_http_index_module
 
-HTTP_INCS="src/http src/http/modules"
+HTTP_INCS="src/http src/http/modules ../libsep/"
 
 HTTP_DEPS="src/http/ngx_http.h \
            src/http/ngx_http_request.h \
@@ -298,6 +298,7 @@ HTTP_SRCS="src/http/ngx_http.c \
            src/http/ngx_http_core_module.c \
            src/http/ngx_http_special_response.c \
            src/http/ngx_http_request.c \
+           src/http/ngx_http_parse_sandbox.c \
            src/http/ngx_http_parse.c \
            src/http/ngx_http_header_filter_module.c \
            src/http/ngx_http_write_filter_module.c \

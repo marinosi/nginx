@@ -8,6 +8,7 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 #include <ngx_http.h>
+#include <ngx_http_parse_internal.h>
 
 
 static char *ngx_http_block(ngx_conf_t *cf, ngx_command_t *cmd, void *conf);
@@ -1746,7 +1747,6 @@ ngx_http_init_listening(ngx_conf_t *cf, ngx_http_conf_port_t *port)
     return NGX_OK;
 }
 
-
 static ngx_listening_t *
 ngx_http_add_listening(ngx_conf_t *cf, ngx_http_conf_addr_t *addr)
 {
@@ -1758,6 +1758,10 @@ ngx_http_add_listening(ngx_conf_t *cf, ngx_http_conf_addr_t *addr)
     if (ls == NULL) {
         return NULL;
     }
+
+#if (!NGX_NO_SANDBOX)
+	http_parse_sandbox_init();
+#endif
 
     ls->addr_ntop = 1;
 

@@ -876,7 +876,7 @@ ngx_http_process_request_line(ngx_event_t *rev)
             }
         }
 
-        rc = ngx_http_parse_request_line(r, r->header_in);
+        rc = ngx_http_parse_request_line_wrapper(r, r->header_in);
 
         if (rc == NGX_OK) {
 

@@ -20,6 +20,7 @@ CPP=
 NGX_OBJS=objs
 
 NGX_DEBUG=NO
+NGX_NO_SANDBOX=NO
 NGX_CC_OPT=
 NGX_LD_OPT=
 CPU=NO
@@ -281,6 +282,7 @@ use the \"--without-http_limit_conn_module\" option instead"
         --with-ld-opt=*)                 NGX_LD_OPT="$value"        ;;
         --with-cpu-opt=*)                CPU="$value"               ;;
         --with-debug)                    NGX_DEBUG=YES              ;;
+        --without-sandbox)               NGX_NO_SANDBOX=YES         ;;
 
         --without-pcre)                  USE_PCRE=DISABLED          ;;
         --with-pcre)                     USE_PCRE=YES               ;;
@@ -464,6 +466,7 @@ cat << END
   --with-openssl-opt=OPTIONS         set additional build options for OpenSSL
 
   --with-debug                       enable debug logging
+  --without-sandbox                  disable sandboxing 
 
 END
 

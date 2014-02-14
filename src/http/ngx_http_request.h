@@ -565,6 +565,8 @@ struct ngx_http_request_s {
     u_char                           *port_start;
     u_char                           *port_end;
 
+	ngx_uint_t                       schema_end_ofs; /* XXX IM: needed? */
+
     unsigned                          http_minor:16;
     unsigned                          http_major:16;
 };

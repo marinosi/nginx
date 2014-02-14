@@ -19,7 +19,10 @@ typedef struct ngx_buf_s  ngx_buf_t;
 
 struct ngx_buf_s {
     u_char          *pos;
+    u_char          *old_pos;
     u_char          *last;
+	size_t           pos_ofs;
+	size_t           last_ofs;
     off_t            file_pos;
     off_t            file_last;
 

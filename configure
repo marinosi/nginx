@@ -23,6 +23,9 @@ if [ $NGX_DEBUG = YES ]; then
     have=NGX_DEBUG . auto/have
 fi
 
+if [ $NGX_NO_SANDBOX = YES ]; then
+    have=NGX_NO_SANDBOX . auto/have
+fi
 
 if test -z "$NGX_PLATFORM"; then
     echo "checking for OS"
