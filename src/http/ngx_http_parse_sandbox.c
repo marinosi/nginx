@@ -33,10 +33,14 @@
 #include <string.h>
 #include <err.h>
 
+#ifdef USE_CAPSICUM
+#include <sys/capability.h>
+#endif /* USE_CAPSICUM */
+
 #if !(NGX_NO_SANDBOX)
 #include <sandbox.h>
 /*#include <sandbox_rpc.h>*/
-#endif
+#endif /* NGX_NO_SANDBOX */
 
 /* DPRINTF */
 #define DEBUG
@@ -99,7 +103,8 @@ ngx_http_parse_request_line_insandbox(ngx_http_request_t *r, ngx_buf_t *b)
 	size_t buflen, len;
 
 	/* Allocate space for the buffer */
-	buflen = b->end - b->pos + 1;
+	buflen = b->last - b->pos + 1;
+	DPRINTF("buflen: %zu", buflen);
 	req = calloc(1, sizeof(*req) + buflen - 1);
 	if(!req)
 		perror("malloc()");
@@ -241,6 +246,11 @@ http_parse_sandbox(void)
 	u_char *buffer;
 	size_t len;
 
+#ifdef USE_CAPSICUM
+	cap_enter();
+	/* XXX IM: Close unnessecary file descriptors here */
+#endif
+
 	for ( ; ; ) {
 		DPRINTF("===> In http_parse_sandbox()");
 
@@ -264,7 +274,7 @@ http_parse_sandbox(void)
 			break;
 			/* For future expansion */
 		default:
-			errx(-1, "sandbox_main: unknown op %d", opno);
+			errx(-1, "sandbox_main: unknown op %u", opno);
 		}
 
 		/* Free buffer */
